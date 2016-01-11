@@ -111,6 +111,9 @@ height: 70%; -->
     margin: 0;
     background-color: #635F51;
     padding: 2em 3em;
+    display:inline;
+    float:left;
+    width: 100%;
 }
 
 
@@ -145,6 +148,10 @@ height: 70%; -->
     margin: 0;
     background-color: #858170;
     padding: 2em 3em;
+    position: relative;
+    display:inline;
+    float:left;
+    width: 100%;
 }
 
 .size_button_left
