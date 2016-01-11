@@ -17,16 +17,11 @@
 
     <script id="entry-template" type="text/x-handlebars-template">
         {{#issues}}
-        <div class="entry">
-            <div class="folio">
-                <img src="img/small/ing_help_small.png" alt="">
-            </div>
-            <div class="description">
-                <h3>{{title}}</h3>
-                {{description}}
-                <div class="download-div"><a class="download"></a></div>
-            </div>
-        </div>
+        <tr>
+            <td>{{title}}</td>
+            <td>{{value}}</td>
+            <td><button type="button" class="size_button_left groups" onclick="">-</button> <span id="{{id}}" class="interactive_num">67919</span> <button type="button" class="size_button_right {{class}}" onclick="">+</button></td>
+        </tr>
         {{/issues}}
     </script>
 </head>
@@ -295,104 +290,7 @@
                 </tr>
                 </thead>
 
-                <tbody>
-                <!-- Loop 1 -->
-                <tr>
-                    <!-- Loop 2 -->
-                    <td>Students</td>
-                    <td>6730</td>
-                    <td><button type="button" class="size_button_left" onclick="">-</button> <span id="studNum" class="interactive_num">6730</span> <button type="button" class="size_button_right" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>Surinamese</td>
-                    <td>67919</td>
-                    <td><button type="button" class="size_button_left groups" onclick="">-</button> <span id="surNum" class="interactive_num">67919</span> <button type="button" class="size_button_right groups" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>Antilleans</td>
-                    <td>11993</td>
-                    <td><button type="button" class="size_button_left groups" onclick="">-</button> <!-- <input type="number" class="interactive_num" value="11993"> --> <span id="antNum" class="interactive_num">11993</span> <button type="button" class="size_button_right groups" onclick="">+</button></td>                        </tr>
-                <tr>
-                    <td>Turkish</td>
-                    <td>41981</td>
-                    <td><button type="button" class="size_button_left groups" onclick="">-</button> <span id="turNum" class="interactive_num">41981</span> <button type="button" class="size_button_right groups" onclick="">+</button></td>                        </tr>
-                <tr>
-                    <td>Moroccans</td>
-                    <td>72330</td>
-                    <td><button type="button" class="size_button_left groups" onclick="">-</button> <span id="morNum" class="interactive_num">72330</span> <button type="button" class="size_button_right groups" onclick="">+</button></td>                        </tr>
-                <tr>
-                    <td>Non-Westerners</td>
-                    <td>84854</td>
-                    <td><button type="button" class="size_button_left groups" onclick="">-</button> <span id="nwNum" class="interactive_num">84854</span> <button type="button" class="size_button_right groups" onclick="">+</button></td>                        </tr>
-                <tr>
-                    <td>Westerners</td>
-                    <td>125720</td>
-                    <td><button type="button" class="size_button_left groups" onclick="">-</button> <span id="wesNum" class="interactive_num">125720</span> <button type="button" class="size_button_right groups" onclick="">+</button></td>                        </tr>
-                <tr>
-                    <td>Dutch</td>
-                    <td>394645</td>
-                    <td><button type="button" class="size_button_left groups" onclick="">-</button><span id="dutNum" class="interactive_num">394645</span><button type="button" class="size_button_right groups" onclick="">+</button></td>                        </tr>
-
-                <tr>
-                    <td>Age 0-19</td>
-                    <td>148808</td>
-                    <td><button type="button" class="size_button_left age" onclick="">-</button><span id="a019" class="interactive_num">148808</span><button type="button" class="size_button_right age" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>Age 20-24</td>
-                    <td>61404</td>
-                    <td><button type="button" class="size_button_left age" onclick="">-</button><span id="a2024" class="interactive_num">61404</span><button type="button" class="size_button_right age" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>Age 25-29</td>
-                    <td>74696</td>
-                    <td><button type="button" class="size_button_left age" onclick="">-</button><span id="a2529" class="interactive_num">74696</span><button type="button" class="size_button_right age" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>Age 30-39</td>
-                    <td>130915</td>
-                    <td><button type="button" class="size_button_left age" onclick="">-</button><span id="a3039" class="interactive_num">130915</span><button type="button" class="size_button_right age" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>Age 40-64</td>
-                    <td>448540</td>
-                    <td><button type="button" class="size_button_left age" onclick="">-</button><span id="a4064" class="interactive_num">448540</span><button type="button" class="size_button_right age" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>Age 65_plus</td>
-                    <td>84115</td>
-                    <td><button type="button" class="size_button_left age" onclick="">-</button><span id="a65plus" class="interactive_num">84115</span><button type="button" class="size_button_right age" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>Low income</td>
-                    <td>234285</td>
-                    <td><button type="button" class="size_button_left income" onclick="">-</button><span id="lowInc" class="interactive_num">234285</span><button type="button" class="size_button_right income" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>Low EU</td>
-                    <td>118929</td>
-                    <td><button type="button" class="size_button_left income" onclick="">-</button><span id="lowEUInc" class="interactive_num">118929</span><button type="button" class="size_button_right income" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>EU average</td>
-                    <td>106254</td>
-                    <td><button type="button" class="size_button_left income" onclick="">-</button><span id="EUavInc" class="interactive_num">106254</span><button type="button" class="size_button_right income" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>43785 - 1.5 modaal</td>
-                    <td>41024</td>
-                    <td><button type="button" class="size_button_left income" onclick="">-</button><span id="43785Inc" class="interactive_num">41024</span><button type="button" class="size_button_right income" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>1.5 modaal - 2 modaal</td>
-                    <td>69170</td>
-                    <td><button type="button" class="size_button_left income" onclick="">-</button><span id="15mInc" class="interactive_num">69170</span><button type="button" class="size_button_right income" onclick="">+</button></td>
-                </tr>
-                <tr>
-                    <td>2 modaal - above</td>
-                    <td>172837</td>
-                    <td><button type="button" class="size_button_left income" onclick="">-</button><span id="2mInc" class="interactive_num">172837</span><button type="button" class="size_button_right  income" onclick="">+</button></td>
-                </tr>
+                <tbody id="tbody">
 
                 </tbody>
 

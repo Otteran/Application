@@ -2,16 +2,14 @@ $(function () {
 
     $.get( "pre.json?callback=?", function( data ) {
 
-        console.log(data);
-        var item = $.grep(data.issues, function (n, i) {
-            return (n.title.indexOf(search_item) > -1)
-        });
+        var item = data.entry.one;
 
+        console.log(item);
         var issues = {"issues": item};
         var template = Handlebars.compile($('#entry-template').html());
-        $('#result-data').empty();
-        $('#result-data').append(template(issues));
-        $('#result-data').find('h4').append(search_item);
+
+        $('#tbody').empty();
+        $('#tbody').append(template(issues));
 
     });
 
@@ -60,8 +58,6 @@ $(function () {
     // Selector Variables used
     //
 
-    console.log(low);
-
     var container = $('#container');
     var container_two = $('#container_two');
     var min_btn = $(".size_button_left");
@@ -91,11 +87,11 @@ $(function () {
             $(this).parent().find($(".interactive_num")).text(parseInt($(this).parent().find($(".interactive_num")).text()) - valueToChange);
 
             if($(this).hasClass('groups')){
-                ageUp('groups')
+                subtract('groups')
             }else if($(this).hasClass('age')){
-                ageUp('age')
+                subtract('age')
             }else {
-                ageUp('income')
+                subtract('income')
             }
 
             size0_60 = 36.156 -1.105 * age0_19 + 0.444 * low + 1.603 * age30_39;
