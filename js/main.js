@@ -47,15 +47,43 @@ var container = $('#container');
 var container_two = $('#container_two');
 
 // Number to be added
-var valueToChange = 100000;
+var valueToChange = 10000;
 
 $(function () {
 
+    var catSelector = document.getElementById('year');
+
+    var event = new Event('change');
+    catSelector.dispatchEvent(event);
+});
+
+function getData(that){
+
     $.get( "pre.json?callback=?", function( data ) {
 
-        var item = data.entry.one;
+        var selecteedYear = that.value;
+        console.log(selecteedYear);
 
-        console.log(item);
+        var item;
+
+        switch(selecteedYear){
+            case 'one':
+                item = data.entry.one;
+                break;
+            case 'two':
+                item = data.entry.two;
+                break;
+            case 'three':
+                item = data.entry.three;
+                break;
+            case 'four':
+                item = data.entry.four;
+                break;
+            case 'five':
+                item = data.entry.five;
+                break;
+        }
+
         var issues = {"issues": item};
         var template = Handlebars.compile($('#entry-template').html());
 
@@ -269,6 +297,34 @@ $(function () {
             {
                 $(this).parent().find($(".interactive_num")).text(parseInt($(this).parent().find($(".interactive_num")).text()) - valueToChange);
 
+                /* Population Age */
+                age0_19 = parseInt($(".tables #a019").text());
+                age20_24 = parseInt($(".tables #a2024").text());
+                age25_29 = parseInt($(".tables #a2529").text());
+                age30_39 = parseInt($(".tables #a3039").text());
+                age40_64 = parseInt($(".tables #a4064").text());
+                age65_plus = parseInt($(".tables #a65plus").text());
+
+                /* Population Nationalities */
+
+                popAntille = parseInt($(".tables #antNum").text());
+                popAutochtoon = parseInt($(".tables #dutNum").text());
+                morccans = parseInt($(".tables #morNum").text());
+                popOtherNW = parseInt($(".tables #nwNum").text());
+                popStudents = parseInt($(".tables #studNum").text());
+                popSuriname = parseInt($(".tables #surNum").text());
+                turkish = parseInt($(".tables #turNum").text());
+                popWest = parseInt($(".tables #wesNum").text());
+
+                /* Population Income */
+
+                low = parseInt($(".tables #lowInc").text());
+                low_EUgrens = parseInt($(".tables #lowEUInc").text());
+                Eugrens_43785 = parseInt($(".tables #EUavInc").text());
+                _43785_1_5xModaal = parseInt($(".tables #43785Inc").text());
+                _1_5xModaal_2xModaal = parseInt($(".tables #15mInc").text());
+                twoxModaal_above = parseInt($(".tables #2mInc").text());
+
                 if($(this).hasClass('groups')){
                     subtract('groups')
                 }else if($(this).hasClass('age')){
@@ -299,6 +355,34 @@ $(function () {
         {
             $(this).parent().find($(".interactive_num")).text(parseInt($(this).parent().find($(".interactive_num")).text()) + valueToChange);
 
+            /* Population Age */
+            age0_19 = parseInt($(".tables #a019").text());
+            age20_24 = parseInt($(".tables #a2024").text());
+            age25_29 = parseInt($(".tables #a2529").text());
+            age30_39 = parseInt($(".tables #a3039").text());
+            age40_64 = parseInt($(".tables #a4064").text());
+            age65_plus = parseInt($(".tables #a65plus").text());
+
+            /* Population Nationalities */
+
+            popAntille = parseInt($(".tables #antNum").text());
+            popAutochtoon = parseInt($(".tables #dutNum").text());
+            morccans = parseInt($(".tables #morNum").text());
+            popOtherNW = parseInt($(".tables #nwNum").text());
+            popStudents = parseInt($(".tables #studNum").text());
+            popSuriname = parseInt($(".tables #surNum").text());
+            turkish = parseInt($(".tables #turNum").text());
+            popWest = parseInt($(".tables #wesNum").text());
+
+            /* Population Income */
+
+            low = parseInt($(".tables #lowInc").text());
+            low_EUgrens = parseInt($(".tables #lowEUInc").text());
+            Eugrens_43785 = parseInt($(".tables #EUavInc").text());
+            _43785_1_5xModaal = parseInt($(".tables #43785Inc").text());
+            _1_5xModaal_2xModaal = parseInt($(".tables #15mInc").text());
+            twoxModaal_above = parseInt($(".tables #2mInc").text());
+
             if($(this).hasClass('groups')){
                 ageUp('groups')
             }else if($(this).hasClass('age')){
@@ -316,228 +400,7 @@ $(function () {
             buyingHouses = 18.742 + 0.147 * age40_64 + 0.264 * twoxModaal_above + 0.302 * Eugrens_43785 - 0.156 * age0_19 + 0.194 * _1_5xModaal_2xModaal;
         });
     });
-
-
-    function ageUp(plus){
-
-        console.log(plus);
-        switch(plus){
-            case 'groups':
-
-                // add % to age
-                age0_19 = (0.15689 * valueToChange) + age0_19;
-                age20_24 = (0.06473 * valueToChange) + age20_24;
-                age25_29 = (0.07875 * valueToChange) + age25_29;
-                age30_39 = (0.13802 * valueToChange) + age30_39;
-                age40_64 = (0.25600 * valueToChange) + age40_64;
-                age65_plus = (0.08868 * valueToChange) + age65_plus;
-
-                // add % to income
-                low = (0.301 * valueToChange) + low;
-                low_EUgrens = (0.158 * valueToChange) + low_EUgrens;
-                Eugrens_43785 = (0.141 * valueToChange) + Eugrens_43785;
-                _43785_1_5xModaal = (0.056 * valueToChange) + _43785_1_5xModaal;
-                _1_5xModaal_2xModaal = (0.093 * valueToChange) + _1_5xModaal_2xModaal;
-                twoxModaal_above = (0.251 * valueToChange) + twoxModaal_above;
-
-
-                // add new value to front-end
-
-                $(".tables #a019").text(age0_19);
-                $(".tables #a2024").text(age20_24);
-                $(".tables #a2529").text(age25_29);
-                $(".tables #a3039").text(age30_39);
-                $(".tables #a4064").text(age40_64);
-                $(".tables #a65plus").text(age65_plus);
-
-                /* Population Nationalities */
-
-                /* Population Income */
-
-                $(".tables #lowInc").text(low);
-                $(".tables #lowEUInc").text(low_EUgrens);
-                $(".tables #EUavInc").text(Eugrens_43785);
-                $(".tables #43785Inc").text(_43785_1_5xModaal);
-                $(".tables #15mInc").text(_1_5xModaal_2xModaal);
-                $(".tables #2mInc").text(twoxModaal_above);
-
-                break;
-            case 'age':
-
-                // add % to group
-                popAntille = (0.0126 * valueToChange) + popAntille;
-                popAutochtoon = (0.545 * valueToChange) + popAutochtoon;
-                popOtherNW = (0.0917 * valueToChange) + popOtherNW;
-                popSuriname = (0.065 * valueToChange) + popSuriname;
-                popWest = (0.1694 * valueToChange) + popWest;
-
-                // add % to income
-                low = (0.301 * valueToChange) + low;
-                low_EUgrens = (0.158 * valueToChange) + low_EUgrens;
-                Eugrens_43785 = (0.141 * valueToChange) + Eugrens_43785;
-                _43785_1_5xModaal = (0.056 * valueToChange) + _43785_1_5xModaal;
-                _1_5xModaal_2xModaal = (0.093 * valueToChange) + _1_5xModaal_2xModaal;
-                twoxModaal_above = (0.251 * valueToChange) + twoxModaal_above;
-
-                $(".tables #antNum").text(popAntille);
-                $(".tables #dutNum").text(popAutochtoon);
-                $(".tables #nwNum").text(popOtherNW);
-                $(".tables #surNum").text(popSuriname);
-                $(".tables #wesNum").text(popWest);
-
-                $(".tables #lowInc").text(low);
-                $(".tables #lowEUInc").text(low_EUgrens);
-                $(".tables #EUavInc").text(Eugrens_43785);
-                $(".tables #43785Inc").text(_43785_1_5xModaal);
-                $(".tables #15mInc").text(_1_5xModaal_2xModaal);
-                $(".tables #2mInc").text(twoxModaal_above);
-
-
-                break;
-            case 'income':
-
-                // add % to group
-                popAntille = (0.0126 * valueToChange) + popAntille;
-                popAutochtoon = (0.545 * valueToChange) + popAutochtoon;
-                popOtherNW = (0.0917 * valueToChange) + popOtherNW;
-                popSuriname = (0.065 * valueToChange) + popSuriname;
-                popWest = (0.1694 * valueToChange) + popWest;
-
-                // add % to age
-                age0_19 = (0.15689 * valueToChange) + age0_19;
-                age20_24 = (0.06473 * valueToChange) + age20_24;
-                age25_29 = (0.07875 * valueToChange) + age25_29;
-                age30_39 = (0.13802 * valueToChange) + age30_39;
-                age40_64 = (0.25600 * valueToChange) + age40_64;
-                age65_plus = (0.08868 * valueToChange) + age65_plus;
-
-                $(".tables #antNum").text(popAntille);
-                $(".tables #dutNum").text(popAutochtoon);
-                $(".tables #nwNum").text(popOtherNW);
-                $(".tables #surNum").text(popSuriname);
-                $(".tables #wesNum").text(popWest);
-
-                $(".tables #a019").text(age0_19);
-                $(".tables #a2024").text(age20_24);
-                $(".tables #a2529").text(age25_29);
-                $(".tables #a3039").text(age30_39);
-                $(".tables #a4064").text(age40_64);
-                $(".tables #a65plus").text(age65_plus);
-
-                break;
-        }
-    }
-
-    function subtract(el){
-
-        switch(el){
-            case 'groups':
-
-                // add % to age
-                age0_19 = (0.15689 * valueToChange) - age0_19;
-                age20_24 = (0.06473 * valueToChange) - age20_24;
-                age25_29 = (0.07875 * valueToChange) - age25_29;
-                age30_39 = (0.13802 * valueToChange) - age30_39;
-                age40_64 = (0.25600 * valueToChange) - age40_64;
-                age65_plus = (0.08868 * valueToChange) - age65_plus;
-
-                // add % to income
-                low = (0.301 * valueToChange) - low;
-                low_EUgrens = (0.158 * valueToChange) - low_EUgrens;
-                Eugrens_43785 = (0.141 * valueToChange) - Eugrens_43785;
-                _43785_1_5xModaal = (0.056 * valueToChange) - _43785_1_5xModaal;
-                _1_5xModaal_2xModaal = (0.093 * valueToChange) - _1_5xModaal_2xModaal;
-                twoxModaal_above = (0.251 * valueToChange) - twoxModaal_above;
-
-
-                // add new value to front-end
-
-                $(".tables #a019").text(age0_19);
-                $(".tables #a2024").text(age20_24);
-                $(".tables #a2529").text(age25_29);
-                $(".tables #a3039").text(age30_39);
-                $(".tables #a4064").text(age40_64);
-                $(".tables #a65plus").text(age65_plus);
-
-                /* Population Nationalities */
-
-                /* Population Income */
-
-                $(".tables #lowInc").text(low);
-                $(".tables #lowEUInc").text(low_EUgrens);
-                $(".tables #EUavInc").text(Eugrens_43785);
-                $(".tables #43785Inc").text(_43785_1_5xModaal);
-                $(".tables #15mInc").text(_1_5xModaal_2xModaal);
-                $(".tables #2mInc").text(twoxModaal_above);
-
-                break;
-            case 'age':
-
-                // add % to group
-                popAntille = (0.0126 * valueToChange) - popAntille;
-                popAutochtoon = (0.545 * valueToChange) - popAutochtoon;
-                popOtherNW = (0.0917 * valueToChange) - popOtherNW;
-                popSuriname = (0.065 * valueToChange) - popSuriname;
-                popWest = (0.1694 * valueToChange) - popWest;
-
-                console.log(low + 'fir');
-                // add % to income
-                low = (0.301 * valueToChange) - low;
-                low_EUgrens = (0.158 * valueToChange) - low_EUgrens;
-                Eugrens_43785 = (0.141 * valueToChange) - Eugrens_43785;
-                _43785_1_5xModaal = (0.056 * valueToChange) - _43785_1_5xModaal;
-                _1_5xModaal_2xModaal = (0.093 * valueToChange) - _1_5xModaal_2xModaal;
-                twoxModaal_above = (0.251 * valueToChange) - twoxModaal_above;
-
-                $(".tables #antNum").text(popAntille);
-                $(".tables #dutNum").text(popAutochtoon);
-                $(".tables #nwNum").text(popOtherNW);
-                $(".tables #surNum").text(popSuriname);
-                $(".tables #wesNum").text(popWest);
-
-                $(".tables #lowInc").text(low);
-                $(".tables #lowEUInc").text(low_EUgrens);
-                $(".tables #EUavInc").text(Eugrens_43785);
-                $(".tables #43785Inc").text(_43785_1_5xModaal);
-                $(".tables #15mInc").text(_1_5xModaal_2xModaal);
-                $(".tables #2mInc").text(twoxModaal_above);
-
-
-                break;
-            case 'income':
-
-                // add % to group
-                popAntille = (0.0126 * valueToChange) - popAntille;
-                popAutochtoon = (0.545 * valueToChange) - popAutochtoon;
-                popOtherNW = (0.0917 * valueToChange) - popOtherNW;
-                popSuriname = (0.065 * valueToChange) - popSuriname;
-                popWest = (0.1694 * valueToChange) - popWest;
-
-                // add % to age
-                age0_19 = (0.15689 * valueToChange) - age0_19;
-                age20_24 = (0.06473 * valueToChange) - age20_24;
-                age25_29 = (0.07875 * valueToChange) - age25_29;
-                age30_39 = (0.13802 * valueToChange) - age30_39;
-                age40_64 = (0.25600 * valueToChange) - age40_64;
-                age65_plus = (0.08868 * valueToChange) - age65_plus;
-
-                $(".tables #antNum").text(popAntille);
-                $(".tables #dutNum").text(popAutochtoon);
-                $(".tables #nwNum").text(popOtherNW);
-                $(".tables #surNum").text(popSuriname);
-                $(".tables #wesNum").text(popWest);
-
-                $(".tables #a019").text(age0_19);
-                $(".tables #a2024").text(age20_24);
-                $(".tables #a2529").text(age25_29);
-                $(".tables #a3039").text(age30_39);
-                $(".tables #a4064").text(age40_64);
-                $(".tables #a65plus").text(age65_plus);
-
-                break;
-        }
-    }
-});
+}
 
 function changePrediction(that){
 
@@ -615,5 +478,317 @@ function changePrediction(that){
                 }
             }
         });
+    }
+}
+
+function ageUp(plus){
+
+    console.log(plus);
+    switch(plus){
+        case 'groups':
+
+            // add % to age
+            age0_19 = (0.15689 * valueToChange) + age0_19;
+            age20_24 = (0.06473 * valueToChange) + age20_24;
+            age25_29 = (0.07875 * valueToChange) + age25_29;
+            age30_39 = (0.13802 * valueToChange) + age30_39;
+            age40_64 = (0.25600 * valueToChange) + age40_64;
+            age65_plus = (0.08868 * valueToChange) + age65_plus;
+
+            // add % to income
+            low = (0.301 * valueToChange) + low;
+            low_EUgrens = (0.158 * valueToChange) + low_EUgrens;
+            Eugrens_43785 = (0.141 * valueToChange) + Eugrens_43785;
+            _43785_1_5xModaal = (0.056 * valueToChange) + _43785_1_5xModaal;
+            _1_5xModaal_2xModaal = (0.093 * valueToChange) + _1_5xModaal_2xModaal;
+            twoxModaal_above = (0.251 * valueToChange) + twoxModaal_above;
+
+
+            // add new value to front-end
+
+            $(".tables #a019").text(age0_19);
+            $(".tables #a2024").text(age20_24);
+            $(".tables #a2529").text(age25_29);
+            $(".tables #a3039").text(age30_39);
+            $(".tables #a4064").text(age40_64);
+            $(".tables #a65plus").text(age65_plus);
+
+            /* Population Nationalities */
+
+            /* Population Income */
+
+            $(".tables #lowInc").text(low);
+            $(".tables #lowEUInc").text(low_EUgrens);
+            $(".tables #EUavInc").text(Eugrens_43785);
+            $(".tables #43785Inc").text(_43785_1_5xModaal);
+            $(".tables #15mInc").text(_1_5xModaal_2xModaal);
+            $(".tables #2mInc").text(twoxModaal_above);
+
+            console.log(_43785_1_5xModaal);
+
+            break;
+        case 'age':
+
+            // add % to group
+            popAntille = (0.0126 * valueToChange) + popAntille;
+            popAutochtoon = (0.545 * valueToChange) + popAutochtoon;
+            popOtherNW = (0.0917 * valueToChange) + popOtherNW;
+            popSuriname = (0.065 * valueToChange) + popSuriname;
+            popWest = (0.1694 * valueToChange) + popWest;
+
+            // add % to income
+            low = (0.301 * valueToChange) + low;
+            low_EUgrens = (0.158 * valueToChange) + low_EUgrens;
+            Eugrens_43785 = (0.141 * valueToChange) + Eugrens_43785;
+            _43785_1_5xModaal = (0.056 * valueToChange) + _43785_1_5xModaal;
+            _1_5xModaal_2xModaal = (0.093 * valueToChange) + _1_5xModaal_2xModaal;
+            twoxModaal_above = (0.251 * valueToChange) + twoxModaal_above;
+
+            $(".tables #antNum").text(popAntille);
+            $(".tables #dutNum").text(popAutochtoon);
+            $(".tables #nwNum").text(popOtherNW);
+            $(".tables #surNum").text(popSuriname);
+            $(".tables #wesNum").text(popWest);
+
+            $(".tables #lowInc").text(low);
+            $(".tables #lowEUInc").text(low_EUgrens);
+            $(".tables #EUavInc").text(Eugrens_43785);
+            $(".tables #43785Inc").text(_43785_1_5xModaal);
+            $(".tables #15mInc").text(_1_5xModaal_2xModaal);
+            $(".tables #2mInc").text(twoxModaal_above);
+
+
+            break;
+        case 'income':
+
+            // add % to group
+            popAntille = (0.0126 * valueToChange) + popAntille;
+            popAutochtoon = (0.545 * valueToChange) + popAutochtoon;
+            popOtherNW = (0.0917 * valueToChange) + popOtherNW;
+            popSuriname = (0.065 * valueToChange) + popSuriname;
+            popWest = (0.1694 * valueToChange) + popWest;
+
+            // add % to age
+            age0_19 = (0.15689 * valueToChange) + age0_19;
+            age20_24 = (0.06473 * valueToChange) + age20_24;
+            age25_29 = (0.07875 * valueToChange) + age25_29;
+            age30_39 = (0.13802 * valueToChange) + age30_39;
+            age40_64 = (0.25600 * valueToChange) + age40_64;
+            age65_plus = (0.08868 * valueToChange) + age65_plus;
+
+            $(".tables #antNum").text(popAntille);
+            $(".tables #dutNum").text(popAutochtoon);
+            $(".tables #nwNum").text(popOtherNW);
+            $(".tables #surNum").text(popSuriname);
+            $(".tables #wesNum").text(popWest);
+
+            $(".tables #a019").text(age0_19);
+            $(".tables #a2024").text(age20_24);
+            $(".tables #a2529").text(age25_29);
+            $(".tables #a3039").text(age30_39);
+            $(".tables #a4064").text(age40_64);
+            $(".tables #a65plus").text(age65_plus);
+
+            break;
+    }
+}
+
+function subtract(el){
+
+    switch(el){
+        case 'groups':
+
+            // add % to age
+            if((age0_19 - (0.15689 * valueToChange))>0) {
+                age0_19 = age0_19 - (0.15689 * valueToChange);
+            }
+
+            if((age20_24 - (0.06473 * valueToChange))>0) {
+                age20_24 = age20_24 - (0.06473 * valueToChange);
+            }
+
+            if((age25_29 - (0.07875 * valueToChange))>0) {
+                age25_29 = age25_29 - (0.07875 * valueToChange);
+            }
+
+            if((age30_39 - (0.13802 * valueToChange))>0){
+                age30_39 = age30_39 - (0.13802 * valueToChange);
+            }
+
+            if((age40_64 - (0.25600 * valueToChange))>0){
+                age40_64 = age40_64 - (0.25600 * valueToChange);
+            }
+
+            if((age65_plus - (0.08868 * valueToChange))>0){
+                age65_plus = age65_plus - (0.08868 * valueToChange);
+            }
+
+            // add % to income
+            if((low -(0.301 * valueToChange))>0){
+                low = low -(0.301 * valueToChange)
+            }
+            if((low_EUgrens - (0.158 * valueToChange))>0){
+                low_EUgrens =  low_EUgrens - (0.158 * valueToChange);
+            }
+            if((Eugrens_43785 - (0.141 * valueToChange))>0){
+                Eugrens_43785 =  Eugrens_43785 - (0.141 * valueToChange)
+            }
+            if((_43785_1_5xModaal - (0.056 * valueToChange))>0){
+                _43785_1_5xModaal = _43785_1_5xModaal - (0.056 * valueToChange)
+            }
+            if((_1_5xModaal_2xModaal - (0.093 * valueToChange))>0){
+                _1_5xModaal_2xModaal = _1_5xModaal_2xModaal - (0.093 * valueToChange)
+            }
+            if((twoxModaal_above - (0.251 * valueToChange))>0){
+                twoxModaal_above = twoxModaal_above - (0.251 * valueToChange)
+            }
+
+
+            // add new value to front-end
+
+            $(".tables #a019").text(age0_19);
+            $(".tables #a2024").text(age20_24);
+            $(".tables #a2529").text(age25_29);
+            $(".tables #a3039").text(age30_39);
+            $(".tables #a4064").text(age40_64);
+            $(".tables #a65plus").text(age65_plus);
+
+            /* Population Nationalities */
+
+            /* Population Income */
+
+            $(".tables #lowInc").text(low);
+            $(".tables #lowEUInc").text(low_EUgrens);
+            $(".tables #EUavInc").text(Eugrens_43785);
+            $(".tables #43785Inc").text(_43785_1_5xModaal);
+            $(".tables #15mInc").text(_1_5xModaal_2xModaal);
+            $(".tables #2mInc").text(twoxModaal_above);
+
+            console.log("I am here - group");
+
+            break;
+        case 'age':
+
+            // add % to group
+            if((popAntille - (0.0126 * valueToChange))>0){
+                popAntille =  popAntille - (0.0126 * valueToChange);
+            }
+
+            if((popAutochtoon - (0.545 * valueToChange))>0){
+                popAutochtoon = popAutochtoon - (0.545 * valueToChange) ;
+            }
+
+            if((popOtherNW - (0.0917 * valueToChange))>0){
+                popOtherNW =  popOtherNW - (0.0917 * valueToChange);
+            }
+
+            if((popSuriname - (0.065 * valueToChange))>0){
+                popSuriname =  popSuriname - (0.065 * valueToChange);
+            }
+
+            if((popWest - (0.1694 * valueToChange))>0){
+                popWest =  popWest - (0.1694 * valueToChange);
+            }
+
+
+            // add % to income
+            if((low -(0.301 * valueToChange))>0){
+                low = low -(0.301 * valueToChange)
+            }
+            if((low_EUgrens - (0.158 * valueToChange))>0){
+                low_EUgrens =  low_EUgrens - (0.158 * valueToChange);
+            }
+            if((Eugrens_43785 - (0.141 * valueToChange))>0){
+                Eugrens_43785 =  Eugrens_43785 - (0.141 * valueToChange)
+            }
+            if((_43785_1_5xModaal - (0.056 * valueToChange))>0){
+                _43785_1_5xModaal = _43785_1_5xModaal - (0.056 * valueToChange)
+            }
+            if((_1_5xModaal_2xModaal - (0.093 * valueToChange))>0){
+                _1_5xModaal_2xModaal = _1_5xModaal_2xModaal - (0.093 * valueToChange)
+            }
+            if((twoxModaal_above - (0.251 * valueToChange))>0){
+                twoxModaal_above = twoxModaal_above - (0.251 * valueToChange)
+            }
+
+            $(".tables #antNum").text(popAntille);
+            $(".tables #dutNum").text(popAutochtoon);
+            $(".tables #nwNum").text(popOtherNW);
+            $(".tables #surNum").text(popSuriname);
+            $(".tables #wesNum").text(popWest);
+
+            $(".tables #lowInc").text(low);
+            $(".tables #lowEUInc").text(low_EUgrens);
+            $(".tables #EUavInc").text(Eugrens_43785);
+            $(".tables #43785Inc").text(_43785_1_5xModaal);
+            $(".tables #15mInc").text(_1_5xModaal_2xModaal);
+            $(".tables #2mInc").text(twoxModaal_above);
+
+            console.log("I am here - age");
+
+
+            break;
+        case 'income':
+
+            // add % to group
+            if((popAntille - (0.0126 * valueToChange))>0){
+                popAntille =  popAntille - (0.0126 * valueToChange);
+            }
+
+            if((popAutochtoon - (0.545 * valueToChange))>0){
+                popAutochtoon = popAutochtoon - (0.545 * valueToChange) ;
+            }
+
+            if((popOtherNW - (0.0917 * valueToChange))>0){
+                popOtherNW =  popOtherNW - (0.0917 * valueToChange);
+            }
+
+            if((popSuriname - (0.065 * valueToChange))>0){
+                popSuriname =  popSuriname - (0.065 * valueToChange);
+            }
+
+            if((popWest - (0.1694 * valueToChange))>0){
+                popWest =  popWest - (0.1694 * valueToChange);
+            }
+
+            // add % to age
+            if((age0_19 - (0.15689 * valueToChange))>0) {
+                age0_19 = age0_19 - (0.15689 * valueToChange);
+            }
+
+            if((age20_24 - (0.06473 * valueToChange))>0) {
+                age20_24 = age20_24 - (0.06473 * valueToChange);
+            }
+
+            if((age25_29 - (0.07875 * valueToChange))>0) {
+                age25_29 = age25_29 - (0.07875 * valueToChange);
+            }
+
+            if((age30_39 - (0.13802 * valueToChange))>0){
+                age30_39 = age30_39 - (0.13802 * valueToChange);
+            }
+
+            if((age40_64 - (0.25600 * valueToChange))>0){
+                age40_64 = age40_64 - (0.25600 * valueToChange);
+            }
+
+            if((age65_plus - (0.08868 * valueToChange))>0){
+                age65_plus = age65_plus - (0.08868 * valueToChange);
+            }
+
+            $(".tables #antNum").text(popAntille);
+            $(".tables #dutNum").text(popAutochtoon);
+            $(".tables #nwNum").text(popOtherNW);
+            $(".tables #surNum").text(popSuriname);
+            $(".tables #wesNum").text(popWest);
+
+            $(".tables #a019").text(age0_19);
+            $(".tables #a2024").text(age20_24);
+            $(".tables #a2529").text(age25_29);
+            $(".tables #a3039").text(age30_39);
+            $(".tables #a4064").text(age40_64);
+            $(".tables #a65plus").text(age65_plus);
+
+            break;
     }
 }

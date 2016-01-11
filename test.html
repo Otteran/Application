@@ -20,7 +20,7 @@
         <tr>
             <td>{{title}}</td>
             <td>{{value}}</td>
-            <td><button type="button" class="size_button_left groups" onclick="">-</button> <span id="{{id}}" class="interactive_num">{{value}}</span> <button type="button" class="size_button_right {{class}}" onclick="">+</button></td>
+            <td><button type="button" class="size_button_left {{class}}" onclick="">-</button> <span id="{{id}}" class="interactive_num">{{value}}</span> <button type="button" class="size_button_right {{class}}" onclick="">+</button></td>
         </tr>
         {{/issues}}
     </script>
@@ -125,12 +125,12 @@
         <h2>Adjustable Data</h2>
 
         <div style="float: left">
-            <h2><select>
-                <option value="2015">2015</option>
-                <option value="2020">2020</option>
-                <option value="2025">2025</option>
-                <option value="2030">2030</option>
-                <option value="2035">2035</option>
+            <h2><select id="year" onchange="getData(this)">
+                <option value="one">2015</option>
+                <option value="two">2020</option>
+                <option value="three">2025</option>
+                <option value="four">2030</option>
+                <option value="five">2035</option>
             </select></h2>
             <table class="tables">
 
