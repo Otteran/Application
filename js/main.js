@@ -118,8 +118,6 @@ function getData(that){
         _1_5xModaal_2xModaal = parseInt($(".tables #15mInc").text());
         twoxModaal_above = parseInt($(".tables #2mInc").text());
 
-        console.log(low);
-
         size0_60 = 36.156 -1.105 * age0_19 + 0.444 * low + 1.603 * age30_39;
 
         size60_80 = - 42.698 + 0.6481 * age65_plus + 0.145 * low - 0.498 * popAntille + 0.306 * age25_29;
@@ -131,6 +129,14 @@ function getData(that){
         privateRentHouses = - 105.514 + 0.837 * popWest - 0.401 * age40_64 + 0.932 * age25_29 - 0.141 * low + 0.168 * popAutochtoon + 5.876 * popAntille - 0.662 * popOtherNW + 0.553 * _43785_1_5xModaal - 0.458 * popStudents - 0.406 * popSuriname;
 
         buyingHouses = 18.742 + 0.147 * age40_64 + 0.264 * twoxModaal_above + 0.302 * Eugrens_43785 - 0.156 * age0_19 + 0.194 * _1_5xModaal_2xModaal;
+
+        size0_60 = Math.ceil(size0_60);
+        size60_80 = Math.ceil(size60_80);
+        size80_plus = Math.ceil(size80_plus);
+        socialRentHouses = Math.ceil(socialRentHouses);
+        privateRentHouses = Math.ceil(privateRentHouses);
+        buyingHouses = Math.ceil(buyingHouses);
+
 
         /*
          *  Charts
@@ -173,7 +179,10 @@ function getData(that){
                 text: 'House sizes in Amsterdam'
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                formatter: function () {
+                    return '<b>' + this.point.name + '</b><br/>' +
+                        this.point.y + ' ';
+                }
             },
             plotOptions: {
                 pie: {
@@ -202,10 +211,7 @@ function getData(that){
                 }, {
                     name: '80 plus',
                     y: size80_plus
-                }],
-                dataLabels: {
-                    format: '{point.y}'
-                }
+                }]
             }]
         });
 
@@ -220,7 +226,10 @@ function getData(that){
                 text: 'House types in Amsterdam'
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                formatter: function () {
+                    return '<b>' + this.point.name + '</b><br/>' +
+                        this.point.y + ' ';
+                }
             },
             plotOptions: {
                 pie: {
@@ -236,7 +245,7 @@ function getData(that){
                 }
             },
             series: [{
-                name: 'Brands',
+                name: 'House type',
                 colorByPoint: true,
                 data: [{
                     name: 'Social houses',
@@ -249,10 +258,7 @@ function getData(that){
                 }, {
                     name: 'Buying houses',
                     y: buyingHouses
-                }],
-                dataLabels: {
-                    format: '{point.y}'
-                }
+                }]
             }]
         });
 
@@ -390,6 +396,8 @@ function getData(that){
             }else {
                 ageUp('income')
             }
+
+
 
             size0_60 = 36.156 -1.105 * age0_19 + 0.444 * low + 1.603 * age30_39;
             size60_80 = - 42.698 + 0.6481 * age65_plus + 0.145 * low - 0.498 * popAntille + 0.306 * age25_29;
@@ -792,3 +800,42 @@ function subtract(el){
             break;
     }
 }
+
+Highcharts.theme = {
+    colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572',
+        '#FF9655', '#FFF263', '#6AF9C4'],
+    chart: {
+        backgroundColor: {
+            linearGradient: [0, 0, 500, 500],
+            stops: [
+                [0, 'rgba(255, 255, 255, 0.3)'],
+                [1, 'rgba(255, 255, 255, 0.3)']
+            ]
+        },
+    },
+    title: {
+        style: {
+            color: '#000',
+            font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+        }
+    },
+    subtitle: {
+        style: {
+            color: '#666666',
+            font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+        }
+    },
+
+    legend: {
+        itemStyle: {
+            font: '9pt Trebuchet MS, Verdana, sans-serif',
+            color: 'black'
+        },
+        itemHoverStyle:{
+            color: 'gray'
+        }
+    }
+};
+
+// Apply the theme
+Highcharts.setOptions(Highcharts.theme);
