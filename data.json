@@ -1,0 +1,31 @@
+{
+  "groups":{
+    "one": [
+      {"id":"studNum","title":"Students","value":67302,"class":"groups"},
+      {"id":"surNum","title":"Surinamese","value":66623,"class":"groups"},
+      {"id":"antNum","title":"Antilleans","value":12125,"class":"groups"},
+      {"id":"turNum","title":"Turkish","value":42358,"class":"groups"},
+      {"id":"morNum","title":"Moroccans","value":74210,"class":"groups"},
+      {"id":"nwNum","title":"Non-Westerners","value":90100,"class":"groups"},
+      {"id":"wesNum","title":"Westerners","value":134124,"class":"groups"},
+      {"id":"dutNum","title":"Dutch","value":402732,"class":"groups"}
+
+    ],
+    "two": [
+      {"id":"a019","title":"Age 0-19","value":175359,"class":"age"},
+      {"id":"a2024","title":"Age 20-24","value":67511,"class":"age"},
+      {"id":"a2529","title":"Age 25-29","value":88679,"class":"age"},
+      {"id":"a3039","title":"Age 30-39","value":155922,"class":"age"},
+      {"id":"a4064","title":"Age 40-64","value":272450,"class":"age"},
+      {"id":"a65plus","title":"Age 65_plus","value":111437,"class":"age"}
+    ],
+    "three": [
+      {"id":"lowInc","title":"Low income","value":266282,"class":"income"},
+      {"id":"lowEUInc","title":"Low EU","value":139776,"class":"income"},
+      {"id":"EUavInc","title":"EU average","value":124737,"class":"income"},
+      {"id":"43785Inc","title":"43785 - 1.5 modaal","value":49541,"class":"income"},
+      {"id":"15mInc","title":"1.5 modaal - 2 modaal","value":82273,"class":"income"},
+      {"id":"2mInc","title":"2 modaal - above","value":222049,"class":"income"}
+    ]
+  }
+}

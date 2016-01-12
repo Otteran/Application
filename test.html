@@ -10,7 +10,6 @@
 
 
     <!-- JQUERY -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Font accessed from https://www.google.com/fonts -->
     <style type="text/css"></style>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:700,400' rel='stylesheet' type='text/css'>
@@ -23,6 +22,15 @@
             <td><button type="button" class="size_button_left {{class}}" onclick="">-</button> <span id="{{id}}" class="interactive_num">{{value}}</span> <button type="button" class="size_button_right {{class}}" onclick="">+</button></td>
         </tr>
         {{/issues}}
+    </script>
+
+    <script id="group-template" type="text/x-handlebars-template">
+        {{#issue}}
+        <tr>
+            <th>{{title}}</th>
+            <td>{{value}}</td>
+        </tr>
+        {{/issue}}
     </script>
 </head>
 
@@ -64,54 +72,29 @@
         <div style="float: left">
             <h2>Predictions</h2>
 
-            <h3>Year:</h3>
             <select id="selectPopulation" onchange="changePrediction(this)">
                 <option value="groups">Groups</option>
                 <option value="age">Age</option>
                 <option value="income">Income</option>
             </select>
 
-            <table class="tables">
+            <table id="datatable" class="tables">
 
                 <thead>
+                <thead>
                 <tr>
-                    <th>Population Group</th>
-                    <th>Population Amount</th>
+                    <th></th>
+                    <th>2015</th>
+                    <th>2020</th>
+                    <th>2025</th>
+                    <th>2030</th>
+                    <th>2035</th>
                 </tr>
                 </thead>
+                </thead>
 
-                <tbody>
-                <!-- Loop 1 -->
-                <tr>
-                    <!-- Loop 2 -->
-                    <td>Surinamese</td>
-                    <td>67919</td>
-                </tr>
-                <tr>
-                    <td>Antilleans</td>
-                    <td>11993</td>
-                </tr>
-                <tr>
-                    <td>Turkish</td>
-                    <td>41981</td>
-                </tr>
-                <tr>
-                    <td>Moroccans</td>
-                    <td>72330</td>
-                </tr>
-                <tr>
-                    <td>Non-Westerners</td>
-                    <td>84854</td>
-                </tr>
-                <tr>
-                    <td>Westerners</td>
-                    <td>125720</td>
-                </tr>
-                <tr>
-                    <td>Dutch</td>
-                    <td>394645</td>
-                </tr>
-                </tr>
+                <tbody id="tbody_one">
+
                 </tbody>
 
             </table>
@@ -157,201 +140,9 @@
     <div style="clear: both;"></div>
 
 </div>
-<table id="datatable" style="display:none;">
-    <thead>
-    <tr>
-        <th></th>
-        <th>2015</th>
-        <th>2020</th>
-        <th>2025</th>
-        <th>2030</th>
-        <th>2035</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th>Surinamers</th>
-        <td>66623</td>
-        <td>64173</td>
-        <td>61167</td>
-        <td>58161</td>
-        <td>54507</td>
-    </tr>
-    <tr>
-        <th>Antillianen</th>
-        <td>12125</td>
-        <td>12320</td>
-        <td>12070.5</td>
-        <td>11821</td>
-        <td>11404</td>
-    </tr>
-    <tr>
-        <th>Turken</th>
-        <td>42358</td>
-        <td>44402</td>
-        <td>44879.5</td>
-        <td>45357</td>
-        <td>45193</td>
-    </tr>
-    <tr>
-        <th>Marokkanen</th>
-        <td>74210</td>
-        <td>77844</td>
-        <td>79255</td>
-        <td>80666</td>
-        <td>80281</td>
-    </tr>
-    <tr>
-        <th>overige niet-w</th>
-        <td>90100</td>
-        <td>107400</td>
-        <td>118723.5</td>
-        <td>130047</td>
-        <td>140083</td>
-    </tr>
-    <tr>
-        <th>westerse alloch	</th>
-        <td>134124</td>
-        <td>152232</td>
-        <td>160843</td>
-        <td>169454</td>
-        <td>176668</td>
-    </tr>
-    <tr>
-        <th>autochtonen</th>
-        <td>402732</td>
-        <td>412987</td>
-        <td>407719.5</td>
-        <td>402452</td>
-        <td>390542</td>
-    </tr>
-    </tbody>
-</table>
-<table id="datatable_two" style="display:none;">
-    <thead>
-    <tr>
-        <th></th>
-        <th>2015</th>
-        <th>2020</th>
-        <th>2025</th>
-        <th>2030</th>
-        <th>2035</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th>low</th>
-        <td>247504</td>
-        <td>262279</td>
-        <td>266282</td>
-        <td>270285</td>
-        <td>270502</td>
-    </tr>
-    <tr>
-        <th>low_EUgrens</th>
-        <td>129919</td>
-        <td>137675</td>
-        <td>139776</td>
-        <td>141877</td>
-        <td>141991</td>
-    </tr>
-    <tr>
-        <th>Eugrens_43785</th>
-        <td>115940</td>
-        <td>122861</td>
-        <td>124737</td>
-        <td>126612</td>
-        <td>126713</td>
-    </tr>
-    <tr>
-        <th>43785_1.5Modaal</th>
-        <td>46047</td>
-        <td>48796</td>
-        <td>49541</td>
-        <td>50286</td>
-        <td>50326</td>
-    </tr>
-    <tr>
-        <th>1.5Modaal_2Modaal</th>
-        <td>76471</td>
-        <td>81036</td>
-        <td>82273</td>
-        <td>83510</td>
-        <td>83577</td>
-    </tr>
-    <tr>
-        <th>2Modaal_plus</th>
-        <td>206390</td>
-        <td>218711</td>
-        <td>222049</td>
-        <td>225387</td>
-        <td>225568</td>
-    </tr>
-    </tbody>
-</table>
-<table id="datatable_one" style="display:none;">
-    <thead>
-    <tr>
-        <th></th>
-        <th>2015</th>
-        <th>2020</th>
-        <th>2025</th>
-        <th>2030</th>
-        <th>2035</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th>0_19</th>
-        <td>165538</td>
-        <td>175359</td>
-        <td>179750</td>
-        <td>179268</td>
-        <td>176582</td>
-    </tr>
-    <tr>
-        <th>20_24</th>
-        <td>68515</td>
-        <td>67511</td>
-        <td>65733</td>
-        <td>62377</td>
-        <td>61664</td>
-    </tr>
-    <tr>
-        <th>25_29</th>
-        <td>85166</td>
-        <td>88679</td>
-        <td>85966</td>
-        <td>81338</td>
-        <td>78493</td>
-    </tr>
-    <tr>
-        <th>30_39</th>
-        <td>142466</td>
-        <td>155922</td>
-        <td>159672</td>
-        <td>154739</td>
-        <td>149613</td>
-    </tr>
-    <tr>
-        <th>40_64</th>
-        <td>263053</td>
-        <td>272450</td>
-        <td>277394</td>
-        <td>276748</td>
-        <td>275443</td>
-    </tr>
-    <tr>
-        <th>65+</th>
-        <td>97534</td>
-        <td>111437</td>
-        <td>126999</td>
-        <td>143488</td>
-        <td>156882</td>
-    </tr>
-    </tbody>
-</table>
 
+
+<script src="js/jquery-1.4.2.min.js "></script>
 <script src="js/highcharts.js"></script>
 <script src="js/modules/data.js"></script>
 <script src="js/modules/exporting.js"></script>

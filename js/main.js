@@ -55,6 +55,9 @@ $(function () {
 
     var event = new Event('change');
     catSelector.dispatchEvent(event);
+
+    var grdSelector = document.getElementById('selectPopulation');
+    grdSelector.dispatchEvent(event);
 });
 
 function getData(that){
@@ -410,11 +413,63 @@ function getData(that){
     });
 }
 
+function getGroupData(that){
+    $.get( "data.json?callback=?", function( data ) {
+
+        var selecteedGroup = that.value;
+        console.log(selectedGroup);
+
+        var item;
+
+        switch (selectedGroup) {
+            case 'one':
+                item = data.groups.one;
+                break;
+            case 'two':
+                item = data.groups.two;
+                break;
+            case 'three':
+                item = data.groups.three;
+                break;
+        }
+
+        var issues = {"issues": item};
+        var template = Handlebars.compile($('#group-template').html());
+
+        $('#tbody_one').empty();
+        $('#tbody_one').append(template(issues));
+    });
+}
+
 function changePrediction(that){
 
-    console.log(that.value);
+    $.get( "data.json?callback=?", function( data ) {
 
-    if(that.value == 'groups'){
+        var selectedGroup = that.value;
+        console.log();
+
+        var item;
+
+        switch (selectedGroup) {
+            case 'groups':
+                item = data.groups.one;
+                break;
+            case 'age':
+                item = data.groups.two;
+                break;
+            case 'income':
+                item = data.groups.three;
+                break;
+        }
+
+
+        var issues = {"issue": item};
+        var template = Handlebars.compile($('#group-template').html());
+
+        $('#tbody_one').empty();
+        $('#tbody_one').append(template(issues));
+
+
         $('#container_pop').highcharts({
             data: {
                 table: 'datatable'
@@ -438,55 +493,7 @@ function changePrediction(that){
                 }
             }
         });
-    }else if(that.value == 'age'){
-        $('#container_pop').highcharts({
-            data: {
-                table: 'datatable_one'
-            },
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Age'
-            },
-            yAxis: {
-                allowDecimals: false,
-                title: {
-                    text: 'Population'
-                }
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                        this.point.y + ' ' + this.point.name.toLowerCase();
-                }
-            }
-        });
-    }else {
-        $('#container_pop').highcharts({
-            data: {
-                table: 'datatable_two'
-            },
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Income'
-            },
-            yAxis: {
-                allowDecimals: false,
-                title: {
-                    text: 'Population'
-                }
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                        this.point.y + ' ' + this.point.name.toLowerCase();
-                }
-            }
-        });
-    }
+    });
 }
 
 function ageUp(plus){
