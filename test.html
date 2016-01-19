@@ -3,17 +3,11 @@
 <head>
 
     <meta charset="UTF-8">
+    <!-- Font accessed from https://www.google.com/fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:700,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <!-- In case we use D3 library for the animted graphs etc (really nice library)
-    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
-
-
-    <!-- JQUERY -->
-    <!-- Font accessed from https://www.google.com/fonts -->
-    <style type="text/css"></style>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:700,400' rel='stylesheet' type='text/css'>
-
+    <!-- templates -->
     <script id="entry-template" type="text/x-handlebars-template">
         {{#issues}}
         <tr>
@@ -42,13 +36,7 @@
     <div>
         <a href="index.html" id="logo"><img src="images/Gemeente_Amsterdam-logo2.png" alt="Logo"></a>
         <ul>
-            <!--
             <li>
-                <a href="#past_data">Past Data</a>
-            </li>
-            -->
-            <li>
-                <!-- <li class="current"> -->
                 <a href="#predictions">Predictions</a>
             </li>
             <li>
@@ -79,9 +67,7 @@
             </select>
 
             <table id="datatable" class="tables">
-
-                <thead>
-                <thead>
+                <thead style="display:none;">
                 <tr>
                     <th></th>
                     <th>2015</th>
@@ -90,7 +76,6 @@
                     <th>2030</th>
                     <th>2035</th>
                 </tr>
-                </thead>
                 </thead>
 
                 <tbody id="tbody_one">
@@ -102,7 +87,7 @@
         <div id="container_pop" style="min-width: 610px; height: 300px; margin: 40px auto; float: left; margin-left: 9em;"></div>
 
     </div>
-<div style="clear: both;"></div>
+    <div style="clear: both;"></div>
     <!-- INTERACTIVE DATA -->
     <div id="adjustable_data">
         <h2>Adjustable Data</h2>
@@ -116,7 +101,6 @@
                 <option value="five">2035</option>
             </select></h2>
             <table class="tables">
-
                 <thead>
                 <tr>
                     <th>Population Group</th>
@@ -138,7 +122,6 @@
         </div>
     </div>
     <div style="clear: both;"></div>
-
 </div>
 
 

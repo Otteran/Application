@@ -1,4 +1,39 @@
-/*
+/**
+ * This is the access-point for all calls into the API.
+ * <strong>An instance of this class, named adobeDPS, is automatically created in the global namespace.</strong>
+ * @namespace <strong>Mixing booth</strong>
+ * <br/>________________________________________________
+ *
+ * <br/>Copyright 2016 Student project Inholland.
+ * <br/>All Rights Reserved.
+ * <br/>
+ * <br/>NOTICE:  All information contained herein is, and remains
+ * the property of ,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Adobe Systems Incorporated and its
+ * suppliers and may be covered by U.S. and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Adobe Systems Incorporated.
+ *
+ *
+ * <br/><br/>
+ * To begin working with the API, you must include the Library and Store API script in your HTML. The AdobeLibraryAPI.js can be included with your store files in the viewer or loaded from your server.
+ * Once that is done, you can work with the API through the use of one of the service objects. Some examples of available service objects are:
+ @example
+ adobeDPS.libraryService         //Used to retrieve folios and to update the library.
+ adobeDPS.authenticationService  //Used for authentication.
+ adobeDPS.deviceService          //Used to get device information such as OS or network status.
+ adobeDPS.receiptService         //Used to retrieve receipts and get subscription information.
+ adobeDPS.settingsService        //Used to retrieve settings for the viewer.
+ adobeDPS.analyticsService       //Used to send custom analytics events.
+ adobeDPS.configurationService   //Used to retrieve application properties and to navigate between tabs.
+ adobeDPS.dialogService          //Used to control dialogs.
+ *
+ **/
+
+/**
  *  House Size
  */
 
@@ -6,12 +41,18 @@ var size0_60;
 var size60_80;
 var size80_plus;
 
-/* House Type */
+/**
+ *  House Type
+ */
+
 var socialRentHouses;
 var privateRentHouses;
 var buyingHouses;
 
-/* Population Age */
+/**
+ *  Population Age
+ */
+
 var age0_19;
 var age20_24;
 var age25_29;
@@ -19,7 +60,9 @@ var age30_39;
 var age40_64;
 var age65_plus;
 
-/* Population Nationalities */
+/**
+ *  Population Nationalities
+ */
 
 var popAntille;
 var popAutochtoon;
@@ -30,7 +73,9 @@ var popSuriname;
 var turkish;
 var popWest;
 
-/* Population Income */
+/**
+ *  House Size
+ */
 
 var low;
 var low_EUgrens;
@@ -39,14 +84,15 @@ var _43785_1_5xModaal;
 var _1_5xModaal_2xModaal;
 var twoxModaal_above;
 
-//
-// Selector Variables used
-//
-
+/**
+ *  Containers for
+ */
 var container = $('#container');
 var container_two = $('#container_two');
 
-// Number to be added
+/**
+ * Number to be added
+ */
 var valueToChange = 10000;
 
 $(function () {
@@ -65,7 +111,6 @@ function getData(that){
     $.get( "pre.json?callback=?", function( data ) {
 
         var selecteedYear = that.value;
-        console.log(selecteedYear);
 
         var item;
 
@@ -141,11 +186,10 @@ function getData(that){
         buyingHouses = Math.ceil(buyingHouses);
 
 
-        /*
+        /**
          *  Charts
+         *
          * */
-
-        // Make some dummy values to test the
 
         $('#container_pop').highcharts({
             data: {
@@ -298,13 +342,10 @@ function getData(that){
         });
 
 
-        min_btn.click(function()
-        {
+        min_btn.click(function(){
 
-
-            if((parseInt($(this).parent().find($(".interactive_num")).text() - valueToChange))>=0)
-            {
-                $(this).parent().find($(".interactive_num")).text(parseInt($(this).parent().find($(".interactive_num")).text()) - valueToChange);
+            if((parseInt($(this).next().text()) - valueToChange)>=0){
+                $(this).next().text(parseInt($(this).next().text()) - valueToChange);
 
                 /* Population Age */
                 age0_19 = parseInt($(".tables #a019").text());
@@ -335,11 +376,11 @@ function getData(that){
                 twoxModaal_above = parseInt($(".tables #2mInc").text());
 
                 if($(this).hasClass('groups')){
-                    subtract('groups')
+                    decrementPopulation('groups')
                 }else if($(this).hasClass('age')){
-                    subtract('age')
+                    decrementPopulation('age')
                 }else {
-                    subtract('income')
+                    decrementPopulation('income')
                 }
 
                 size0_60 = 36.156 -1.105 * age0_19 + 0.444 * low + 1.603 * age30_39;
@@ -352,17 +393,14 @@ function getData(that){
 
             }
 
-            else
-            {
+            else {
                 $(this).parent().find($(".interactive_num")).text(0);
-                size0_60 = 36.156 -1.105 * age0_19 + 0.444 * low + 1.603 * age30_39;
-                console.log(size0_60);
             }
         });
 
         plus_btn.click(function()
         {
-            $(this).parent().find($(".interactive_num")).text(parseInt($(this).parent().find($(".interactive_num")).text()) + valueToChange);
+            $(this).prev().text(parseInt($(this).prev().text()) + valueToChange);
 
             /* Population Age */
             age0_19 = parseInt($(".tables #a019").text());
@@ -393,11 +431,11 @@ function getData(that){
             twoxModaal_above = parseInt($(".tables #2mInc").text());
 
             if($(this).hasClass('groups')){
-                ageUp('groups')
+                incrementPopulation('groups')
             }else if($(this).hasClass('age')){
-                ageUp('age')
+                incrementPopulation('age')
             }else {
-                ageUp('income')
+                incrementPopulation('income')
             }
 
 
@@ -414,6 +452,7 @@ function getData(that){
 }
 
 function getGroupData(that){
+
     $.get( "data.json?callback=?", function( data ) {
 
         var selecteedGroup = that.value;
@@ -496,9 +535,8 @@ function changePrediction(that){
     });
 }
 
-function ageUp(plus){
+function incrementPopulation(plus){
 
-    console.log(plus);
     switch(plus){
         case 'groups':
 
@@ -538,8 +576,6 @@ function ageUp(plus){
             $(".tables #43785Inc").text(_43785_1_5xModaal);
             $(".tables #15mInc").text(_1_5xModaal_2xModaal);
             $(".tables #2mInc").text(twoxModaal_above);
-
-            console.log(_43785_1_5xModaal);
 
             break;
         case 'age':
@@ -608,7 +644,7 @@ function ageUp(plus){
     }
 }
 
-function subtract(el){
+function decrementPopulation(el){
 
     switch(el){
         case 'groups':
@@ -659,7 +695,10 @@ function subtract(el){
             }
 
 
-            // add new value to front-end
+            /**
+             * Population Age
+             * add new value to front-end
+             */
 
             $(".tables #a019").text(age0_19);
             $(".tables #a2024").text(age20_24);
@@ -668,9 +707,9 @@ function subtract(el){
             $(".tables #a4064").text(age40_64);
             $(".tables #a65plus").text(age65_plus);
 
-            /* Population Nationalities */
-
-            /* Population Income */
+            /**
+             * Population Income
+             * */
 
             $(".tables #lowInc").text(low);
             $(".tables #lowEUInc").text(low_EUgrens);
@@ -679,12 +718,13 @@ function subtract(el){
             $(".tables #15mInc").text(_1_5xModaal_2xModaal);
             $(".tables #2mInc").text(twoxModaal_above);
 
-            console.log("I am here - group");
-
             break;
         case 'age':
 
-            // add % to group
+            /**
+             * subtract percentage(%) from group
+             */
+
             if((popAntille - (0.0126 * valueToChange))>0){
                 popAntille =  popAntille - (0.0126 * valueToChange);
             }
@@ -738,8 +778,6 @@ function subtract(el){
             $(".tables #43785Inc").text(_43785_1_5xModaal);
             $(".tables #15mInc").text(_1_5xModaal_2xModaal);
             $(".tables #2mInc").text(twoxModaal_above);
-
-            console.log("I am here - age");
 
 
             break;
@@ -808,6 +846,11 @@ function subtract(el){
     }
 }
 
+/**
+ * custom theme for graphs
+ * @type {{colors: string[], chart: {backgroundColor: {linearGradient: number[], stops: *[]}}, title: {style: {color: string, font: string}}, subtitle: {style: {color: string, font: string}}, legend: {itemStyle: {font: string, color: string}, itemHoverStyle: {color: string}}}}
+ */
+
 Highcharts.theme = {
     colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572',
         '#FF9655', '#FFF263', '#6AF9C4'],
@@ -818,7 +861,7 @@ Highcharts.theme = {
                 [0, 'rgba(255, 255, 255, 0.3)'],
                 [1, 'rgba(255, 255, 255, 0.3)']
             ]
-        },
+        }
     },
     title: {
         style: {
