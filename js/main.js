@@ -34,7 +34,7 @@
  **/
 
 /**
- *  House Size
+ *  Variables for house sizes
  */
 
 var size0_60;
@@ -42,7 +42,7 @@ var size60_80;
 var size80_plus;
 
 /**
- *  House Type
+ *  Variables for house types
  */
 
 var socialRentHouses;
@@ -50,7 +50,7 @@ var privateRentHouses;
 var buyingHouses;
 
 /**
- *  Population Age
+ *  Variables for age groups
  */
 
 var age0_19;
@@ -61,7 +61,7 @@ var age40_64;
 var age65_plus;
 
 /**
- *  Population Nationalities
+ *  Variables for Nationalities
  */
 
 var popAntille;
@@ -93,7 +93,7 @@ var container_two = $('#container_two');
 /**
  * Number to be added
  */
-var valueToChange = 10000;
+var valueToChange = '';
 
 $(function () {
 
@@ -108,7 +108,7 @@ $(function () {
 
 function getData(that){
 
-    $.get( "pre.json?callback=?", function( data ) {
+    $.getJSON( "pre.json", function( data ) {
 
         var selecteedYear = that.value;
 
@@ -344,8 +344,72 @@ function getData(that){
 
         min_btn.click(function(){
 
-            if((parseInt($(this).next().text()) - valueToChange)>=0){
-                $(this).next().text(parseInt($(this).next().text()) - valueToChange);
+            valueToChange = parseInt($('#valueToChange').val());
+
+            if(valueToChange > 0 || valueToChange == !''){
+                if((parseInt($(this).next().text()) - valueToChange)>=0){
+                    $(this).next().text(parseInt($(this).next().text()) - valueToChange);
+
+                    /* Population Age */
+                    age0_19 = parseInt($(".tables #a019").text());
+                    age20_24 = parseInt($(".tables #a2024").text());
+                    age25_29 = parseInt($(".tables #a2529").text());
+                    age30_39 = parseInt($(".tables #a3039").text());
+                    age40_64 = parseInt($(".tables #a4064").text());
+                    age65_plus = parseInt($(".tables #a65plus").text());
+
+                    /* Population Nationalities */
+
+                    popAntille = parseInt($(".tables #antNum").text());
+                    popAutochtoon = parseInt($(".tables #dutNum").text());
+                    morccans = parseInt($(".tables #morNum").text());
+                    popOtherNW = parseInt($(".tables #nwNum").text());
+                    popStudents = parseInt($(".tables #studNum").text());
+                    popSuriname = parseInt($(".tables #surNum").text());
+                    turkish = parseInt($(".tables #turNum").text());
+                    popWest = parseInt($(".tables #wesNum").text());
+
+                    /* Population Income */
+
+                    low = parseInt($(".tables #lowInc").text());
+                    low_EUgrens = parseInt($(".tables #lowEUInc").text());
+                    Eugrens_43785 = parseInt($(".tables #EUavInc").text());
+                    _43785_1_5xModaal = parseInt($(".tables #43785Inc").text());
+                    _1_5xModaal_2xModaal = parseInt($(".tables #15mInc").text());
+                    twoxModaal_above = parseInt($(".tables #2mInc").text());
+
+                    if($(this).hasClass('groups')){
+                        decrementPopulation('groups')
+                    }else if($(this).hasClass('age')){
+                        decrementPopulation('age')
+                    }else {
+                        decrementPopulation('income')
+                    }
+
+                    size0_60 = 36.156 -1.105 * age0_19 + 0.444 * low + 1.603 * age30_39;
+                    size60_80 = - 42.698 + 0.6481 * age65_plus + 0.145 * low - 0.498 * popAntille + 0.306 * age25_29;
+                    size80_plus = - 36.186 + 0.618 * twoxModaal_above + 0.333 * age0_19 - 0.800 * age30_39 + 0.293 * Eugrens_43785 + 0.362 * popOtherNW + 0.479 * _43785_1_5xModaal;
+
+                    socialRentHouses = 4.366 + 0.658 * low + 0.591 * low_EUgrens - 0.635 * age25_29;
+                    privateRentHouses = - 105.514 + 0.837 * popWest - 0.401 * age40_64 + 0.932 * age25_29 - 0.141 * low + 0.168 * popAutochtoon + 5.876 * popAntille - 0.662 * popOtherNW + 0.553 * _43785_1_5xModaal - 0.458 * popStudents - 0.406 * popSuriname;
+                    buyingHouses = 18.742 + 0.147 * age40_64 + 0.264 * twoxModaal_above + 0.302 * Eugrens_43785 - 0.156 * age0_19 + 0.194 * _1_5xModaal_2xModaal;
+
+                }
+
+                else {
+                    $(this).parent().find($(".interactive_num")).text(0);
+                }
+            }else {
+                alert('Please enter an amount to add or subtract');
+            }
+        });
+
+        plus_btn.click(function() {
+
+            valueToChange = parseInt($('#valueToChange').val());
+
+            if(valueToChange > 0 || valueToChange == !''){
+                $(this).prev().text(parseInt($(this).prev().text()) + valueToChange);
 
                 /* Population Age */
                 age0_19 = parseInt($(".tables #a019").text());
@@ -376,12 +440,14 @@ function getData(that){
                 twoxModaal_above = parseInt($(".tables #2mInc").text());
 
                 if($(this).hasClass('groups')){
-                    decrementPopulation('groups')
+                    incrementPopulation('groups')
                 }else if($(this).hasClass('age')){
-                    decrementPopulation('age')
+                    incrementPopulation('age')
                 }else {
-                    decrementPopulation('income')
+                    incrementPopulation('income')
                 }
+
+
 
                 size0_60 = 36.156 -1.105 * age0_19 + 0.444 * low + 1.603 * age30_39;
                 size60_80 = - 42.698 + 0.6481 * age65_plus + 0.145 * low - 0.498 * popAntille + 0.306 * age25_29;
@@ -390,63 +456,9 @@ function getData(that){
                 socialRentHouses = 4.366 + 0.658 * low + 0.591 * low_EUgrens - 0.635 * age25_29;
                 privateRentHouses = - 105.514 + 0.837 * popWest - 0.401 * age40_64 + 0.932 * age25_29 - 0.141 * low + 0.168 * popAutochtoon + 5.876 * popAntille - 0.662 * popOtherNW + 0.553 * _43785_1_5xModaal - 0.458 * popStudents - 0.406 * popSuriname;
                 buyingHouses = 18.742 + 0.147 * age40_64 + 0.264 * twoxModaal_above + 0.302 * Eugrens_43785 - 0.156 * age0_19 + 0.194 * _1_5xModaal_2xModaal;
-
-            }
-
-            else {
-                $(this).parent().find($(".interactive_num")).text(0);
-            }
-        });
-
-        plus_btn.click(function()
-        {
-            $(this).prev().text(parseInt($(this).prev().text()) + valueToChange);
-
-            /* Population Age */
-            age0_19 = parseInt($(".tables #a019").text());
-            age20_24 = parseInt($(".tables #a2024").text());
-            age25_29 = parseInt($(".tables #a2529").text());
-            age30_39 = parseInt($(".tables #a3039").text());
-            age40_64 = parseInt($(".tables #a4064").text());
-            age65_plus = parseInt($(".tables #a65plus").text());
-
-            /* Population Nationalities */
-
-            popAntille = parseInt($(".tables #antNum").text());
-            popAutochtoon = parseInt($(".tables #dutNum").text());
-            morccans = parseInt($(".tables #morNum").text());
-            popOtherNW = parseInt($(".tables #nwNum").text());
-            popStudents = parseInt($(".tables #studNum").text());
-            popSuriname = parseInt($(".tables #surNum").text());
-            turkish = parseInt($(".tables #turNum").text());
-            popWest = parseInt($(".tables #wesNum").text());
-
-            /* Population Income */
-
-            low = parseInt($(".tables #lowInc").text());
-            low_EUgrens = parseInt($(".tables #lowEUInc").text());
-            Eugrens_43785 = parseInt($(".tables #EUavInc").text());
-            _43785_1_5xModaal = parseInt($(".tables #43785Inc").text());
-            _1_5xModaal_2xModaal = parseInt($(".tables #15mInc").text());
-            twoxModaal_above = parseInt($(".tables #2mInc").text());
-
-            if($(this).hasClass('groups')){
-                incrementPopulation('groups')
-            }else if($(this).hasClass('age')){
-                incrementPopulation('age')
             }else {
-                incrementPopulation('income')
+                alert('Please enter an amount to add or subtract');
             }
-
-
-
-            size0_60 = 36.156 -1.105 * age0_19 + 0.444 * low + 1.603 * age30_39;
-            size60_80 = - 42.698 + 0.6481 * age65_plus + 0.145 * low - 0.498 * popAntille + 0.306 * age25_29;
-            size80_plus = - 36.186 + 0.618 * twoxModaal_above + 0.333 * age0_19 - 0.800 * age30_39 + 0.293 * Eugrens_43785 + 0.362 * popOtherNW + 0.479 * _43785_1_5xModaal;
-
-            socialRentHouses = 4.366 + 0.658 * low + 0.591 * low_EUgrens - 0.635 * age25_29;
-            privateRentHouses = - 105.514 + 0.837 * popWest - 0.401 * age40_64 + 0.932 * age25_29 - 0.141 * low + 0.168 * popAutochtoon + 5.876 * popAntille - 0.662 * popOtherNW + 0.553 * _43785_1_5xModaal - 0.458 * popStudents - 0.406 * popSuriname;
-            buyingHouses = 18.742 + 0.147 * age40_64 + 0.264 * twoxModaal_above + 0.302 * Eugrens_43785 - 0.156 * age0_19 + 0.194 * _1_5xModaal_2xModaal;
         });
     });
 }
@@ -482,7 +494,7 @@ function getGroupData(that){
 
 function changePrediction(that){
 
-    $.get( "data.json?callback=?", function( data ) {
+    $.getJSON( "data.json", function( data ) {
 
         var selectedGroup = that.value;
         console.log();

@@ -93,13 +93,16 @@
         <h2>Adjustable Data</h2>
 
         <div style="float: left">
-            <h2><select id="year" onchange="getData(this)">
-                <option value="one">2015</option>
-                <option value="two">2020</option>
-                <option value="three">2025</option>
-                <option value="four">2030</option>
-                <option value="five">2035</option>
-            </select></h2>
+            <h2>
+                <select id="year" onchange="getData(this)">
+                    <option value="one">2015</option>
+                    <option value="two">2020</option>
+                    <option value="three">2025</option>
+                    <option value="four">2030</option>
+                    <option value="five">2035</option>
+                </select>
+                <input type="number" id="valueToChange" placeholder="Enter value to add/subtract">
+            </h2>
             <table class="tables">
                 <thead>
                 <tr>
@@ -125,7 +128,7 @@
 </div>
 
 
-<script src="js/jquery-1.4.2.min.js "></script>
+<script src="js/jquery-1.12.0.min.js"></script>
 <script src="js/highcharts.js"></script>
 <script src="js/modules/data.js"></script>
 <script src="js/modules/exporting.js"></script>

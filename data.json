@@ -1,31 +1,31 @@
 {
   "groups":{
     "one": [
-      {"id":"studNum","title":"Students","value":67302,"class":"groups"},
-      {"id":"surNum","title":"Surinamese","value":66623,"class":"groups"},
-      {"id":"antNum","title":"Antilleans","value":12125,"class":"groups"},
-      {"id":"turNum","title":"Turkish","value":42358,"class":"groups"},
-      {"id":"morNum","title":"Moroccans","value":74210,"class":"groups"},
-      {"id":"nwNum","title":"Non-Westerners","value":90100,"class":"groups"},
-      {"id":"wesNum","title":"Westerners","value":134124,"class":"groups"},
-      {"id":"dutNum","title":"Dutch","value":402732,"class":"groups"}
+      {"id":"studNum","title":"Students","value_1":67302,"value_2":67302,"value_3":67302,"value_4":67302,"value_5":67302,"class":"groups"},
+      {"id":"surNum","title":"Surinamese","value":66623,"value_2":64173,"value_3":61167,"value_4":58161,"value_5":54507,"class":"groups"},
+      {"id":"antNum","title":"Antilleans","value":12125,"value_2":12320,"value_3":12070.5,"value_4":11821,"value_5":11404,"class":"groups"},
+      {"id":"turNum","title":"Turkish","value":42358,"value_2":44402,"value_3":44879.5,"value_4":45357,"value_5":45193,"class":"groups"},
+      {"id":"morNum","title":"Moroccans","value":74210,"value_2":77844,"value_3":79255,"value_4":80666,"value_5":80281,"class":"groups"},
+      {"id":"nwNum","title":"Non-Westerners","value":90100,"value_2":107400,"value_3":118723.5,"value_4":130047,"value_5":140083,"class":"groups"},
+      {"id":"wesNum","title":"Westerners","value":134124,"value_2":152232,"value_3":160843,"value_4":169454,"value_5":176668,"class":"groups"},
+      {"id":"dutNum","title":"Dutch","value":402732,"value_2":412987,"value_3":407719.5,"value_4":402452,"value_5":390542,"class":"groups"}
 
     ],
     "two": [
-      {"id":"a019","title":"Age 0-19","value":175359,"class":"age"},
-      {"id":"a2024","title":"Age 20-24","value":67511,"class":"age"},
-      {"id":"a2529","title":"Age 25-29","value":88679,"class":"age"},
-      {"id":"a3039","title":"Age 30-39","value":155922,"class":"age"},
-      {"id":"a4064","title":"Age 40-64","value":272450,"class":"age"},
-      {"id":"a65plus","title":"Age 65_plus","value":111437,"class":"age"}
+      {"id":"a019","title":"Age 0-19","value":165538,"value_2":175359,"value_3":179750,"value_4":179268,"value_5":176582,"class":"age"},
+      {"id":"a2024","title":"Age 20-24","value":68515,"value_2":67511,"value_3":65733,"value_4":62377,"value_5":61664,"class":"age"},
+      {"id":"a2529","title":"Age 25-29","value":85166,"value_2":88679,"value_3":85966,"value_4":81338,"value_5":78493,"class":"age"},
+      {"id":"a3039","title":"Age 30-39","value":142466,"value_2":155922,"value_3":159672,"value_4":154739,"value_5":149613,"class":"age"},
+      {"id":"a4064","title":"Age 40-64","value":263053,"value_2":272450,"value_3":277394,"value_4":276748,"value_5":275443,"class":"age"},
+      {"id":"a65plus","title":"Age 65_plus","value":97534,"value_2":111437,"value_3":126999,"value_4":143488,"value_5":156882,"class":"age"}
     ],
     "three": [
-      {"id":"lowInc","title":"Low income","value":266282,"class":"income"},
-      {"id":"lowEUInc","title":"Low EU","value":139776,"class":"income"},
-      {"id":"EUavInc","title":"EU average","value":124737,"class":"income"},
-      {"id":"43785Inc","title":"43785 - 1.5 modaal","value":49541,"class":"income"},
-      {"id":"15mInc","title":"1.5 modaal - 2 modaal","value":82273,"class":"income"},
-      {"id":"2mInc","title":"2 modaal - above","value":222049,"class":"income"}
+      {"id":"lowInc","title":"Low income","value":247504,"value_2":262279,"value_3":266282,"value_4":270285,"value_5":270502,"class":"income"},
+      {"id":"lowEUInc","title":"Low EU","value":129919,"value_2":137675,"value_3":139776,"value_4":141877,"value_5":141991,"class":"income"},
+      {"id":"EUavInc","title":"EU average","value":115940,"value_2":122861,"value_3":124737,"value_4":126612,"value_5":126713,"class":"income"},
+      {"id":"43785Inc","title":"43785 - 1.5 modaal","value":46047,"value_2":48796,"value_3":49541,"value_4":50286,"value_5":50326,"class":"income"},
+      {"id":"15mInc","title":"1.5 modaal - 2 modaal","value":76471,"value_2":81036,"value_3":82273,"value_4":83510,"value_5":83577,"class":"income"},
+      {"id":"2mInc","title":"2 modaal - above","value":206390,"value_2":218711,"value_3":222049,"value_4":225387,"value_5":225568,"class":"income"}
     ]
   }
 }
