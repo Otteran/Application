@@ -497,19 +497,22 @@ function changePrediction(that){
     $.getJSON( "data.json", function( data ) {
 
         var selectedGroup = that.value;
-        console.log();
+        var txt = '';
 
         var item;
 
         switch (selectedGroup) {
             case 'groups':
                 item = data.groups.one;
+                txt = 'Ethnic groups';
                 break;
             case 'age':
                 item = data.groups.two;
+                txt = 'Age groups';
                 break;
             case 'income':
                 item = data.groups.three;
+                txt = 'Income groups';
                 break;
         }
 
@@ -529,7 +532,7 @@ function changePrediction(that){
                 type: 'column'
             },
             title: {
-                text: 'Ethnic groups'
+                text: txt
             },
             yAxis: {
                 allowDecimals: false,

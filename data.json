@@ -1,7 +1,6 @@
 {
   "groups":{
     "one": [
-      {"id":"studNum","title":"Students","value_1":67302,"value_2":67302,"value_3":67302,"value_4":67302,"value_5":67302,"class":"groups"},
       {"id":"surNum","title":"Surinamese","value":66623,"value_2":64173,"value_3":61167,"value_4":58161,"value_5":54507,"class":"groups"},
       {"id":"antNum","title":"Antilleans","value":12125,"value_2":12320,"value_3":12070.5,"value_4":11821,"value_5":11404,"class":"groups"},
       {"id":"turNum","title":"Turkish","value":42358,"value_2":44402,"value_3":44879.5,"value_4":45357,"value_5":45193,"class":"groups"},
